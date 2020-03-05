@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.tweet-form { margin: 50px 0px 50px 0px; }
+.container { width: 600px; }
+
+.tweet-body {
+    border-top: 1px solid #ccc;
+    margin: 0px 0px 20px 0px;
+}
+
+.tweet-body > h4 {
+    margin: 20px 0px 0px 0px;
+}
+
+.tweet-body > p {
+    margin: 5px 0px 10px 0px;
+}
+
+.tweet-body > a {
+    color: red;
+}
+
+.modal-backdrop {
+    /* bug fix - otherwise is black */    
+    opacity: 0.5; 
+}
+
+.landing-not-logged-in {
+    margin: 50px 0px 0px 0px;
+}

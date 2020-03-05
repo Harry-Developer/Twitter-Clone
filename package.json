@@ -1,0 +1,20 @@
+{
+  "name": "twitter-site",
+  "version": "1.0.0",
+  "description": "simple twitter site",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,33 @@
+<!-- Image and text -->
+
+
+<nav class="navbar navbar-light bg-light">
+    
+    <div class="container">
+        <a class="navbar-brand" href="/">
+        <img src="../images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Twitter Site
+        </a>
+
+        <ul class="navbar-nav">
+
+            <% if(!loggedin) { %>
+                <li class="nav-item active">
+                    <a href="#" data-toggle="modal" data-target="#loginModal"> Login </a>
+                </li>
+            <% } else { %>
+                <li class="nav-item active">
+                    <a href="/logout" > Logout </a>
+                </li>
+            <% } %>
+        </ul>
+
+
+        
+    </div>
+
+    
+  
+</nav>
+
+
