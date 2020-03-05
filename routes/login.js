@@ -52,3 +52,37 @@ exports.logout = function(req, res) {
     req.session.destroy()
     res.redirect('/')
 }
+
+exports.changePassword = function(req, res) {
+
+    var currentPassword = req.body.currentPassword
+    var newPassword = req.body.passwordNew
+    var newPasswordAgain = req.body.passwordNewAgain
+
+    if(newPassword === newPasswordAgain) {
+
+        connection.query('SELECT * FROM users WHERE username = ?', [req.session.username], function(error, rows, fields) {
+            if(error) throw error;
+
+            bcrypt.compare(currentPassword, rows[0].password, function(err, result) {
+                if(result) {
+
+                    bcrypt.hash(newPassword, saltRounds, function(err, hash) {
+                        connection.query('UPDATE users SET password = ? WHERE username = ?', [hash, req.session.username], function(error, rows, fields) {
+                            if(error) throw error;
+                        })
+                    });
+
+                    res.redirect('/account')
+
+                } else {
+                    res.redirect('/')
+                }
+            });
+
+        })
+        
+    } else {
+        res.redirect('/')
+    }
+}
