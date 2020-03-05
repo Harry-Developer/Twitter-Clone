@@ -37,3 +37,23 @@ exports.deleteTweet = function(req, res) {
 
     res.redirect('/')
 }
+
+exports.getUserTweets = function(req, res) { 
+
+    if(!req.session.loggedin) {
+        res.redirect('/')
+        res.end()
+    } else {
+
+        connection.query('SELECT * FROM tweets WHERE user = ? ORDER BY time DESC', [req.session.username],function(error, rows, fields) {
+            if(error) throw error;
+
+            res.render('pages/account', {
+                total: rows.length,
+                id: rows,
+                user: rows,
+                message: rows
+            })
+        })
+    }
+}

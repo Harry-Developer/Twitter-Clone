@@ -34,6 +34,7 @@ app.get('/delete/:id', tweet.deleteTweet)
 app.post('/login', login.login)
 app.post('/register', login.register)
 app.get('/logout', login.logout)
+app.get('/account', tweet.getUserTweets)
 
 app.listen(port)
 console.log(port + ' is the magic port');

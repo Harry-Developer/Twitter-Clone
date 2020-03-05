@@ -88,8 +88,20 @@
     
     <div class="container">
 
+        
 
         <% if (loggedin) { %> 
+
+            <div class="account-navigation">
+                <ul class="navbar-nav">
+    
+                    <li class="nav-item active">
+                        <a href="/account"> Account </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
             <form action="/process-tweet" method="POST" class="tweet-form">
                 <div class="form-group">
                     <label>Tweet message here: </label>
