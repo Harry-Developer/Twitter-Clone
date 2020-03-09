@@ -52,6 +52,27 @@
             </div>
         </div>
 
+        <div class="modal" id="confirmModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"> Confirm Account Deletion </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p> Are you sure? </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  
+                  <a class="btn btn-primary"  href="/delete-account"> Delete Account  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
         <div class="user-welcome">
             <h1> Hello <%- username %> </h1>
         </div>
@@ -67,7 +88,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" style="color: red;" href="/delete-account"> Delete Account  </a>
+                    <a class="nav-link delete-account" href="#" style="color: red;" data-toggle="modal" data-target="#confirmModal"> Delete Account </a>
                 </li>
               </ul>
             </div>

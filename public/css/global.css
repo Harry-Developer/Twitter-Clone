@@ -40,7 +40,9 @@ body {
 .follows {
     margin: 20px 0px 0px 0px;
 }
-
+.delete-account {
+    color: red;
+}
 .follows > ul {
     padding: 0px;
 }
