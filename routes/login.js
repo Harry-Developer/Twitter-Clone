@@ -86,3 +86,22 @@ exports.changePassword = function(req, res) {
         res.redirect('/')
     }
 }
+
+exports.deleteAccount = function(req, res) {
+    if(req.session.loggedin) {
+
+        connection.query('DELETE FROM tweets WHERE user = ?', [req.session.username], function(error, rows, fields) {
+            if(error) throw error;
+        })
+        
+        connection.query('DELETE FROM users WHERE username = ?', [req.session.username], function(error, rows, fields) {
+            if(error) throw error;
+            console.log('account gone')
+            req.session.destroy()
+            res.redirect('/')
+        })
+    }
+    else {
+        res.redirect('/')
+    }
+}

@@ -36,6 +36,15 @@ body {
     margin: 20px 0px 0px 0px;
 }
 
-.tweets-account {
+.follows {
     margin: 20px 0px 0px 0px;
+}
+
+.follows > ul {
+    padding: 0px;
+}
+
+.follows > ul > li {
+    display: inline;
+    margin: 0px 10px 0px 0px;
 }
