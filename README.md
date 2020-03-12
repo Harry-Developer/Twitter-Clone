@@ -36,7 +36,7 @@ the correct users name.
 
 ## Install
 
-Installation is easy, all required modules are listed below, down load and run.
+Installation is easy, all required modules are listed below, download and run.
 
 ```
 
