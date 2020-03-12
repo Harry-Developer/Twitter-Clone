@@ -3,7 +3,7 @@ body {
     padding: 0;
 }
 
-.tweet-form { margin: 50px 0px 50px 0px; }
+.tweet-form { margin: 20px 0px 50px 0px; }
 .container { width: 600px; }
 
 .tweet-body {
