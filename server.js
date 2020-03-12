@@ -2,9 +2,9 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var session = require('express-session')
-var tweet = require('./routes/tweet');
-var login = require('./routes/login');
-var profile = require('./routes/profile')
+var tweet = require('./models/tweet');
+var login = require('./models/login');
+var profile = require('./models/profile')
 var app = express();
 var port = 3000;
 
