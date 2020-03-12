@@ -3,16 +3,17 @@ body {
     padding: 0;
 }
 
-.tweet-form { margin: 50px 0px 50px 0px; }
+.tweet-form { margin: 20px 0px 50px 0px; }
 .container { width: 600px; }
 
 .tweet-body {
-    border-top: 1px solid #ccc;
+    /*border-top: 1px solid #ccc;*/
     margin: 0px 0px 20px 0px;
+    padding: 10px;
 }
 
-.tweet-body > h4 {
-    margin: 20px 0px 0px 0px;
+.tweet-body:nth-of-type(odd) {
+    background-color: #f2f2f2;
 }
 
 .tweet-body > p {
@@ -31,3 +32,30 @@ body {
 .landing-not-logged-in {
     margin: 50px 0px 0px 0px;
 }
+
+.account-navigation {
+    margin: 20px 0px 0px 0px;
+}
+
+.follows {
+    margin: 20px 0px 0px 0px;
+}
+
+.follows > ul {
+    padding: 0px;
+}
+
+.follows > ul > li {
+    display: inline;
+    margin: 0px 10px 0px 0px;
+}
+
+.search-nav {
+    margin: 20px 0px 20px 0px;
+    background-color: none;
+}
+
+.search-form {
+    width: 100%;
+}
+

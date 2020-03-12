@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>twitter site </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+
+    
+    <%- include('../partials/header') %>
+    
+    <div class="container">
+
+        <% if (loggedin) { %> 
+
+            <div class="account-navigation">
+                <ul class="navbar-nav">
+    
+                    <li class="nav-item active">
+                        <a href="/account"> Account </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+        <% } %>
+
+        <div class="user-welcome">
+            <h1> Welcome to  <%- user[0].user %>'s profile </h1>
+        </div>
+
+        <h4>  Tweets: </h4>
+        <% for(var i = 0; i < total; i++) { %>
+            <div class="tweet-body">
+                <h4> <a href="/profile/<%- user[i].user %>"> @<%- user[i].user %> </a> </h4>
+                <p> <%- message[i].message %> </p>
+                <% if(user[i].user === username) { %> 
+                    <a href="/delete/<%- id[i].id %>"> Delete </a>
+                <% } %>
+            </div>
+        <% } %>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
