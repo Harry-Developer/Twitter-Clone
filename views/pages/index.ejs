@@ -115,7 +115,7 @@
             
             <% for(var i = 0; i < total; i++) { %>
                 <div class="tweet-body">
-                    <h4> @<%- user[i].user %> </h4>
+                    <h4> <a href="/profile/<%- user[i].user %>"> @<%- user[i].user %> </a> </h4>
                     <p> <%- message[i].message %> </p>
                     <% if(user[i].user === username) { %> 
                         <a href="/delete/<%- id[i].id %>"> Delete </a>
@@ -129,13 +129,11 @@
         <% } %>
     </div>
 
-    
-    
-    
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
+
+
 
         $(document).ready(function(){
             $("#modalLink").click(function(){

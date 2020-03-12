@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var session = require('express-session')
 var tweet = require('./routes/tweet');
 var login = require('./routes/login');
+var profile = require('./routes/profile')
 var app = express();
 var port = 3000;
 
@@ -37,6 +38,8 @@ app.get('/logout', login.logout)
 app.get('/account', tweet.getUserTweets)
 app.post('/change-password', login.changePassword)
 app.get('/delete-account', login.deleteAccount)
+app.get('/profile/:profileName', profile.getInfo)
+
 
 app.listen(port)
 console.log(port + ' is the magic port');
