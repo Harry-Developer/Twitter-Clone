@@ -49,3 +49,13 @@ body {
     display: inline;
     margin: 0px 10px 0px 0px;
 }
+
+.search-nav {
+    margin: 20px 0px 20px 0px;
+    background-color: none;
+}
+
+.search-form {
+    width: 100%;
+}
+

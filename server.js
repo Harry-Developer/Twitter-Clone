@@ -39,6 +39,7 @@ app.get('/account', tweet.getUserTweets)
 app.post('/change-password', login.changePassword)
 app.get('/delete-account', login.deleteAccount)
 app.get('/profile/:profileName', profile.getInfo)
+app.post('/search-user', profile.search)
 
 
 app.listen(port)
