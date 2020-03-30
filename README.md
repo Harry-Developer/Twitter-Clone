@@ -40,7 +40,7 @@ Installation is easy, all required modules are listed below, download and run.
 
 ```
 
-npm install express express-session mysql ejs bcrypt
+npm install 
 node server.js
 
 ```
