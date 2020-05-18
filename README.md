@@ -38,10 +38,33 @@ the correct users name.
 
 Installation is easy, all required modules are listed below, download and run.
 
-```
-
-npm install 
-node server.js
+### Node Setup 
 
 ```
+$ npm install 
+$ node server.js
+
+```
+
+### SQL table creations.
+
+```
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `password` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tweets` (
+  `id` int(11) NOT NULL,
+  `user` varchar(150) NOT NULL,
+  `message` varchar(140) NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+```
+
+
+
 
