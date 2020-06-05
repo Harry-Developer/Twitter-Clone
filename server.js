@@ -42,6 +42,7 @@ app.get('/delete-account', login.deleteAccount)
 app.get('/profile/:profileName', profile.getInfo)
 app.post('/search-user', profile.search)
 app.get('/follow-user/:username', profile.followUser)
+app.get('/unfollow-user/:username', profile.unfollowUser)
 
 
 app.listen(port)

@@ -14,12 +14,25 @@ exports.getInfo = function(req, res) {
 
             if(rows.length > 0) {
 
-                res.render('pages/profile', {
-                    total: rows.length,
-                    id: rows,
-                    user: rows,
-                    message: rows
+                sql_following = "SELECT * FROM User_Followers WHERE user_id = ? AND follower_id = ?"
+
+                let profile_id = rows[0].user_id
+                let user_id = req.session.user_id
+
+                connection.query(sql_following, [user_id, profile_id], (error, results, fields) => {
+                    if (error) throw error;
+                    
+                    res.render('pages/profile', {
+                        total: rows.length,
+                        id: rows,
+                        user: rows,
+                        message: rows,
+                        isFollowing: results.length > 0 ? true : false
+                    })
+
                 })
+
+                
             } else {
                 res.redirect('/')
             }
@@ -67,8 +80,6 @@ exports.followUser = function(req, res) {
         
             connection.query(sql_follower_insert, [data], (error, results, fields) => {
                 if (error) throw error;
-        
-                console.log('following added')
             })
         })
     })
@@ -76,4 +87,30 @@ exports.followUser = function(req, res) {
     res.redirect('/profile/' + follow_username)
 
 }
+
+exports.unfollowUser = function(req, res) {
+
+
+    let follow_username = req.params.username;
+    let username = req.session.username;
+
+    sql_follower_id = "SELECT * FROM users WHERE username = ?"
+
+    connection.query(sql_follower_id, [follow_username], (error, results, fields) => {
+        if (error) throw error;
+
+        follower_id = results[0].id 
+        user_id = req.session.user_id
+        
+        sql_unfollow_user = "DELETE FROM User_Followers WHERE user_id = ? AND follower_id = ?"
+
+        connection.query(sql_unfollow_user, [user_id, follower_id], (error, results, fields) => {
+            if (error) throw error;
+        })
+    })
+    
+    res.redirect('/profile/' + follow_username)
+
+}
+
 
