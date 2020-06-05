@@ -19,6 +19,7 @@ app.use(session(sess))
 app.use(function(req, res, next) {
     res.locals.loggedin = req.session.loggedin
     res.locals.username = req.session.username
+    res.locals.user_id =  req.session.user_id
     next();
 })
 
@@ -40,6 +41,7 @@ app.post('/change-password', login.changePassword)
 app.get('/delete-account', login.deleteAccount)
 app.get('/profile/:profileName', profile.getInfo)
 app.post('/search-user', profile.search)
+app.get('/follow-user/:username', profile.followUser)
 
 
 app.listen(port)
