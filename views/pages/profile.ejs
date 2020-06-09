@@ -37,7 +37,7 @@
         <div class="profile-controls">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav profile-links">
                         <% if(isFollowing) { %>
                             <li class="nav-item">
                                 <a style="color: red" href="/unfollow-user/<%- user[0].user %>"> Unfollow </a>
@@ -47,6 +47,9 @@
                                 <a href="/follow-user/<%- user[0].user %>"> Follow </a>
                             </li>
                         <% } %>
+                        <li class="nav-item">
+                            <a href="<%- user[0].user %>/following"> Following </a>
+                        </li>
                     </ul>
                 </div>
             </nav>

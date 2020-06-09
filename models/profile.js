@@ -113,4 +113,29 @@ exports.unfollowUser = function(req, res) {
 
 }
 
+exports.getFollowing = function(req, res) {
+
+
+    var username = req.params.profileName
+
+    let sql_user_id = "SELECT * FROM users WHERE username = ?"
+
+    connection.query(sql_user_id, [username], (error, results, fields) => {
+        if (error) throw error;
+
+        var user_id = results[0].id
+
+        let sql_following = "SELECT * FROM users WHERE id in (SELECT follower_id FROM User_Followers WHERE user_id = ?)"
+
+        connection.query(sql_following, [user_id], (error, results, fields) => {
+            if (error) throw error;
+    
+            res.render('pages/following', {
+                data: results
+            })
+        })
+    })
+   
+}
+
 
