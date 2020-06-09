@@ -21,9 +21,9 @@ exports.getTweets = function(req, res) {
 
     var user_id = req.session.user_id;
 
-    let sql_tweets = "SELECT * FROM tweets WHERE user_id in (SELECT follower_id FROM User_Followers WHERE user_id = ?)"
+    let sql_tweets = "SELECT * FROM tweets WHERE user_id in (SELECT follower_id FROM User_Followers WHERE user_id = ?) or user_id = ? ORDER BY time DESC"
 
-    connection.query(sql_tweets, [user_id], function(error, rows, fields) {
+    connection.query(sql_tweets, [user_id, user_id], function(error, rows, fields) {
         if(error) throw error;
 
         res.render('pages/index', {
