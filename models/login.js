@@ -3,15 +3,24 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
-exports.register = function(req, res) {
+exports.register = (req, res) => {
 
     var email    = req.body.email
     var username = req.body.username
     var password = req.body.password
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
-        let post = {email: email, username: username, password: hash}
-        connection.query('INSERT INTO users SET ?', post, function(error, rows, fields) {
+
+        let sql_register = `INSERT INTO users 
+                            SET ?`
+
+        let post = {
+            email: email, 
+            username: username, 
+            password: hash
+        }
+
+        connection.query(sql_register, post, (error, rows, fields) => {
             if(error) throw error;
         })
     });
@@ -19,16 +28,23 @@ exports.register = function(req, res) {
     res.redirect('/')
 }
 
-exports.login = function(req, res) {
+exports.login = (req, res) => {
 
     var email = req.body.email
     var password = req.body.password
 
-    connection.query('SELECT * FROM users WHERE email = ?', [email], function(error, rows, fields) {
+    let sql_login_exists = `SELECT * FROM users 
+                            WHERE email = ?`
+
+    connection.query(sql_login_exists, [email], (error, rows, fields) => {
         if (error) throw error
         
         if(rows.length > 0) {
-            connection.query('SELECT * FROM users WHERE email = ?', [email], function(error, rows, fields) {
+
+            let sql_login = `SELECT * FROM users 
+                            WHERE email = ?`
+
+            connection.query(sql_login, [email], (error, rows, fields)  => {
                 
                 bcrypt.compare(password, rows[0].password, function(err, result) {
                     if(result) {
@@ -40,7 +56,6 @@ exports.login = function(req, res) {
                         res.redirect('/')
                     }
                 });
-            
             })
         } else {
             res.redirect('/')
@@ -49,12 +64,12 @@ exports.login = function(req, res) {
 
 }
 
-exports.logout = function(req, res) {
+exports.logout = (req, res)  => {
     req.session.destroy()
     res.redirect('/')
 }
 
-exports.changePassword = function(req, res) {
+exports.changePassword = (req, res) => {
 
     var currentPassword = req.body.currentPassword
     var newPassword = req.body.passwordNew
@@ -62,14 +77,22 @@ exports.changePassword = function(req, res) {
 
     if(newPassword === newPasswordAgain) {
 
-        connection.query('SELECT * FROM users WHERE username = ?', [req.session.username], function(error, rows, fields) {
+        let sql_user_exists = `SELECT * FROM users
+                               WHERE username = ?`
+
+        connection.query(sql_user_exists, [req.session.username], (error, rows, fields) => {
             if(error) throw error;
 
             bcrypt.compare(currentPassword, rows[0].password, function(err, result) {
                 if(result) {
 
                     bcrypt.hash(newPassword, saltRounds, function(err, hash) {
-                        connection.query('UPDATE users SET password = ? WHERE username = ?', [hash, req.session.username], function(error, rows, fields) {
+
+                        let sql_change_password = `UPDATE users 
+                                                   SET password = ? 
+                                                   WHERE username = ?`
+
+                        connection.query(sql_change_password, [hash, req.session.username], (error, rows, fields) => {
                             if(error) throw error;
                         })
                     });
@@ -88,16 +111,22 @@ exports.changePassword = function(req, res) {
     }
 }
 
-exports.deleteAccount = function(req, res) {
+exports.deleteAccount = (req, res) => {
     if(req.session.loggedin) {
 
-        connection.query('DELETE FROM tweets WHERE user = ?', [req.session.username], function(error, rows, fields) {
+        let sql_delete_tweets = `DELETE FROM tweets 
+                                 WHERE user = ?`
+
+        connection.query(sql_delete_tweets, [req.session.username], (error, rows, fields) => {
             if(error) throw error;
         })
+
+        let sql_delete_user = `DELETE FROM users 
+                               WHERE username = ?`
         
-        connection.query('DELETE FROM users WHERE username = ?', [req.session.username], function(error, rows, fields) {
+        connection.query(sql_delete_user, [req.session.username], (error, rows, fields) => {
             if(error) throw error;
-            console.log('account gone')
+            
             req.session.destroy()
             res.redirect('/')
         })

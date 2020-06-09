@@ -10,7 +10,9 @@ exports.sendTweet = function(req, res) {
         user_id: req.session.user_id
     };
 
-    var query = connection.query('INSERT INTO tweets SET ?', post, function (error, results, fields) {
+    let sql_add_tweet = `INSERT INTO tweets SET ?`
+
+    connection.query(sql_add_tweet, post, (error, results, fields) => {
         if (error) throw error;
     });
 
@@ -21,9 +23,13 @@ exports.getTweets = function(req, res) {
 
     var user_id = req.session.user_id;
 
-    let sql_tweets = "SELECT * FROM tweets WHERE user_id in (SELECT follower_id FROM User_Followers WHERE user_id = ?) or user_id = ? ORDER BY time DESC"
+    let sql_tweets = `SELECT * FROM tweets 
+                      WHERE user_id in 
+                      (SELECT follower_id FROM User_Followers WHERE user_id = ?) 
+                      or user_id = ? 
+                      ORDER BY time DESC`
 
-    connection.query(sql_tweets, [user_id, user_id], function(error, rows, fields) {
+    connection.query(sql_tweets, [user_id, user_id], (error, rows, fields) => {
         if(error) throw error;
 
         res.render('pages/index', {
@@ -39,8 +45,12 @@ exports.getTweets = function(req, res) {
 exports.deleteTweet = function(req, res) {
     var tweetId = req.params.id
     var user = req.session.username
+
+    let sql_delete_tweet = `DELETE FROM tweets 
+                            WHERE id = ? 
+                            AND user = ?`
     
-    connection.query('DELETE FROM tweets WHERE id = ? and user = ?', [tweetId, user], function(error, rows, fields) {
+    connection.query(sql_delete_tweet, [tweetId, user], (error, rows, fields) => {
         if(error) throw error;
     })
 
@@ -54,7 +64,11 @@ exports.getUserTweets = function(req, res) {
         res.end()
     } else {
 
-        connection.query('SELECT * FROM tweets WHERE user = ? ORDER BY time DESC', [req.session.username],function(error, rows, fields) {
+        let sql_user_tweets = `SELECT * FROM tweets
+                               WHERE user = ?
+                               ORDER BY time DESC`
+
+        connection.query(sql_user_tweets, [req.session.username], (error, rows, fields) => {
             if(error) throw error;
 
             res.render('pages/account', {
