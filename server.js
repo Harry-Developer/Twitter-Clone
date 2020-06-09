@@ -19,6 +19,7 @@ app.use(session(sess))
 app.use(function(req, res, next) {
     res.locals.loggedin = req.session.loggedin
     res.locals.username = req.session.username
+    res.locals.user_id =  req.session.user_id
     next();
 })
 
@@ -39,7 +40,11 @@ app.get('/account', tweet.getUserTweets)
 app.post('/change-password', login.changePassword)
 app.get('/delete-account', login.deleteAccount)
 app.get('/profile/:profileName', profile.getInfo)
+app.get('/profile/:profileName/following', profile.getFollowing)
+app.get('/profile/:profileName/followers', profile.getFollowers)
 app.post('/search-user', profile.search)
+app.get('/follow-user/:username', profile.followUser)
+app.get('/unfollow-user/:username', profile.unfollowUser)
 
 
 app.listen(port)

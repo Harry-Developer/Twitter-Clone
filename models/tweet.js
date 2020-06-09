@@ -4,7 +4,12 @@ exports.sendTweet = function(req, res) {
 
     var tweet = req.body.tweetContent;
     
-    var post  = {user: req.session.username, message: tweet};
+    var post  = {
+        user: req.session.username, 
+        message: tweet,
+        user_id: req.session.user_id
+    };
+
     var query = connection.query('INSERT INTO tweets SET ?', post, function (error, results, fields) {
         if (error) throw error;
     });
@@ -14,7 +19,11 @@ exports.sendTweet = function(req, res) {
 
 exports.getTweets = function(req, res) {
 
-    connection.query('SELECT * FROM tweets ORDER BY time DESC', function(error, rows, fields) {
+    var user_id = req.session.user_id;
+
+    let sql_tweets = "SELECT * FROM tweets WHERE user_id in (SELECT follower_id FROM User_Followers WHERE user_id = ?) or user_id = ? ORDER BY time DESC"
+
+    connection.query(sql_tweets, [user_id, user_id], function(error, rows, fields) {
         if(error) throw error;
 
         res.render('pages/index', {

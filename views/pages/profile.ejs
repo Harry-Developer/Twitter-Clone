@@ -33,6 +33,32 @@
             <h1> Welcome to  <%- user[0].user %>'s profile </h1>
         </div>
 
+        <% if (loggedin) { %>
+        <div class="profile-controls">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav profile-links">
+                        <% if(isFollowing) { %>
+                            <li class="nav-item">
+                                <a style="color: red" href="/unfollow-user/<%- user[0].user %>"> Unfollow </a>
+                            </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <a href="/follow-user/<%- user[0].user %>"> Follow </a>
+                            </li>
+                        <% } %>
+                        <li class="nav-item">
+                            <a href="<%- user[0].user %>/following"> Following </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%- user[0].user %>/followers"> Followers </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <% } %>
+
         <h4>  Tweets: </h4>
         <% for(var i = 0; i < total; i++) { %>
             <div class="tweet-body">

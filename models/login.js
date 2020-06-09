@@ -34,6 +34,7 @@ exports.login = function(req, res) {
                     if(result) {
                         req.session.loggedin = true
                         req.session.username = rows[0].username
+                        req.session.user_id = rows[0].id
                         res.redirect('/')
                     } else {
                         res.redirect('/')
