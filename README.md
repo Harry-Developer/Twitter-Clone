@@ -41,9 +41,8 @@ Installation is easy, all required modules are listed below, download and run.
 ### Node Setup 
 
 ```
-$ npm install 
-$ node server.js
-
+yarn install 
+yarn start
 ```
 
 ### SQL table creations.
