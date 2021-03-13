@@ -160,7 +160,7 @@ exports.getFollowers = function(req, res) {
         if (error) throw error;
 
         var user_id = results[0].id
-
+        
         let sql_following = `SELECT * FROM users 
                              WHERE id in 
                              (SELECT user_id FROM User_Followers WHERE follower_id = ?)`
